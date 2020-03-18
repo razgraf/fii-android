@@ -4,10 +4,12 @@
     <string name="menu_about">About Us</string>
     <string name="menu_call">Call Support</string>
     <string name="menu_website">Check our website</string>
+    <string name="menu_settings">Settings</string>
 
     <string name="struct_connect">Connect to your account</string>
 
     <string name="words_connect">Connect</string>
+    <string name="words_disconnect">Disconnect</string>
     <string name="words_welcome">Welcome</string>
 
     <string name="words_cancel">Cancel</string>

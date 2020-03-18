@@ -1,16 +1,15 @@
 package ro.vansoftware.onlineshop;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +20,9 @@ import java.util.ArrayList;
 import ro.vansoftware.onlineshop.adapter.ProductAdapter;
 import ro.vansoftware.onlineshop.dialog.ConnectDialogFragment;
 import ro.vansoftware.onlineshop.model.Product;
+import ro.vansoftware.onlineshop.storage.Shared;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ConnectDialogFragment.ConnectDialogListener {
 
 
 
@@ -33,14 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
     Boolean connected = false;
 
+    Shared storage, settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.storage = new Shared(this, Shared.STORAGE);
+        this.settings = new Shared(this, Shared.SETTINGS);
         onViewBinder();
         onDataBinder();
-
-        Log.e("Lifecycle", "onCreate");
     }
 
 
@@ -107,8 +109,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.action_about:
-                Intent intentVisit = new Intent(this, AboutActivity.class);
-                startActivity(intentVisit);
+                Intent intentAbout = new Intent(this, AboutActivity.class);
+                startActivity(intentAbout);
+                break;
+            case R.id.action_settings:
+                Intent intentSettings = new Intent(this, SettingsActivity.class);
+                startActivity(intentSettings);
+                break;
             default: break;
         }
 
@@ -119,9 +126,46 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void onViewBinder(){
-        listView = findViewById(R.id.list);
-        viewFlipper = findViewById(R.id.header);
+        this.listView = findViewById(R.id.list);
+        this.viewFlipper = findViewById(R.id.header);
+        this.onUserBinder();
     }
+
+    private void onUserBinder(){
+        final MainActivity self = this;
+        this.connected = self.storage.get(Shared.USER_USERNAME) != null && self.storage.get(Shared.USER_PASSWORD) != null;
+
+        if(this.connected){
+
+            String message = self.settings.get(Shared.SETTING_MESSAGE,"Welcome");
+            String age = self.settings.get(Shared.SETTING_AGE,"Alive");
+            String username = self.storage.get( Shared.USER_USERNAME,"");
+
+
+            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.headerKnown)));
+            ((TextView)findViewById(R.id.welcome)).setText( message + " " + username + "("+age +")" );
+            (findViewById(R.id.buttonDisconnect)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    self.storage.set( Shared.USER_USERNAME, null);
+                    self.storage.set( Shared.USER_PASSWORD, null);
+                    self.onUserBinder();
+                }
+            });
+        }else {
+            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.headerUnknown)));
+            (findViewById(R.id.buttonConnect)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ConnectDialogFragment connect = new ConnectDialogFragment();
+                    connect.show(getSupportFragmentManager(), "connect");
+
+                }
+            });
+        }
+
+    }
+
     private void onDataBinder(){
 
 
@@ -130,32 +174,23 @@ public class MainActivity extends AppCompatActivity {
         products.add(new Product("Cola","Description of Cola"));
         products.add(new Product("Pizza","Description of Pizza"));
 
-        adapter = new ProductAdapter(this, R.layout.activity_main, products);
-        listView.setAdapter(adapter);
+        this.adapter = new ProductAdapter(this, R.layout.activity_main, products);
+        this.listView.setAdapter(adapter);
+
+        this.onUserBinder();
 
 
+    }
 
-        if(connected){
-            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.headerKnown)));
-            ((TextView)findViewById(R.id.welcome)).setText("Welcome, Razvan");
-            (findViewById(R.id.buttonDisconnect)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(MainActivity.this, "Disconnect", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }else {
-            viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.headerUnknown)));
-            (findViewById(R.id.buttonConnect)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(MainActivity.this, "Connect", Toast.LENGTH_SHORT).show();
-                    ConnectDialogFragment connect = new ConnectDialogFragment();
-                    connect.show(getSupportFragmentManager(), "connect");
-                }
-            });
-        }
+    @Override
+    public void onDialogPositiveClick(String username, String password) {
+        this.storage.set(Shared.USER_USERNAME, username);
+        this.storage.set( Shared.USER_PASSWORD, password);
+        onUserBinder();
+    }
 
+    @Override
+    public void onDialogNegativeClick() {
 
     }
 }

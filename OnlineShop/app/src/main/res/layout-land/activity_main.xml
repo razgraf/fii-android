@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,12 +12,72 @@
         android:orientation="vertical"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <ViewFlipper
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Landscape"
-            />
+            android:id="@+id/header"
+            android:background="@color/colorPrimaryDark"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:id="@+id/headerUnknown"
+
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/struct_connect"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/words_connect"
+                    android:backgroundTint="#fff"
+                    android:paddingHorizontal="30dp"
+                    android:id="@+id/buttonConnect"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/headerKnown"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/words_welcome"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:id="@+id/welcome"
+
+                    />
+
+                <Button
+                    android:id="@+id/buttonDisconnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#fff"
+                    android:textColor="#cb2c30"
+                    android:paddingHorizontal="30dp"
+                    android:text="@string/words_disconnect"
+
+                    />
+            </LinearLayout>
+        </ViewFlipper>
 
         <ListView
             android:layout_width="match_parent"
@@ -27,4 +87,4 @@
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditTextPreference
+        app:key="SETTING_MESSAGE"
+        app:title="Welcome message"
+        app:summary="Provide a message that will be printed after you connect"
+        android:persistent="true"
+        android:defaultValue="Welcome"
+        />
+
+    <EditTextPreference
+        app:key="SETTING_AGE"
+        app:title="Age"
+        app:summary="Provide your age so we don't sell you illegal stuff"
+        android:persistent="true"
+        android:defaultValue="Alive"
+        />
+
+</PreferenceScreen>
