@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="in.amzbizsol.vts.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_first"
+        android:id="@+id/action_about"
         android:orderInCategory="1"
-        android:title="Menu Item 1"
+        android:title="@string/menu_about"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_second"
-        android:orderInCategory="2"
-        android:title="Menu Item 2"
+        android:id="@+id/action_call"
+        android:orderInCategory="1"
+        android:title="@string/menu_call"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_website"
+        android:orderInCategory="1"
+        android:title="@string/menu_website"
         app:showAsAction="never" />
 </menu>

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">OnlineShop</string>
+
+    <string name="menu_about">About Us</string>
+    <string name="menu_call">Call Support</string>
+    <string name="menu_website">Check our website</string>
+
+    <string name="struct_connect">Connect to your account</string>
+
+    <string name="words_connect">Connect</string>
+    <string name="words_welcome">Welcome</string>
+
+    <string name="words_cancel">Cancel</string>
+
+    <string name="words_username">Username</string>
+    <string name="words_password">Password</string>
+
+    <string name="warning_credentials">Username (min 3) and/or Password (min 5) are too short.</string>
 </resources>
