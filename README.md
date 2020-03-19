@@ -48,3 +48,16 @@ The Options Menu includes 3 actions with the following intents:
     1. Settings Activity (4p)
     2. Shared Preferences implementation (4p)
 ```
+
+| Main Activity                        | Create Product                       | Settings Activity                            | Settings Pref                                 |
+| ------------------------------------ | ------------------------------------ | -------------------------------------------- | --------------------------------------------- |
+| ![Main Activity](images/l5_main.png) | ![Create Product](images/l5_add.png) | ![Settings Activity](images/l5_settings.png) | ![Settings Pref](images/l5_settings_pref.png) |
+
+**Story**
+
+1. Implemented Shared Pref system for user connect/disconnect
+2. Migrated to androidX
+3. Implemented `PreferenceScreen` system
+4. Connected settings preferences to other parts of the app (`Main Screen`)
+5. Used local storage (internal) to save the list of items/products
+6. Provided a way (dialog) to create items or clear the list (pref settings)

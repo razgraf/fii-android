@@ -3,7 +3,9 @@ package ro.vansoftware.onlineshop.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Product implements Parcelable {
+import java.io.Serializable;
+
+public class Product implements Parcelable, Serializable {
 
 
     private String title;

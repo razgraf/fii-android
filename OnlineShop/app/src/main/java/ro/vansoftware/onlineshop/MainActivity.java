@@ -19,10 +19,15 @@ import java.util.ArrayList;
 
 import ro.vansoftware.onlineshop.adapter.ProductAdapter;
 import ro.vansoftware.onlineshop.dialog.ConnectDialogFragment;
+import ro.vansoftware.onlineshop.dialog.ProductDialogFragment;
 import ro.vansoftware.onlineshop.model.Product;
+import ro.vansoftware.onlineshop.storage.Internal;
 import ro.vansoftware.onlineshop.storage.Shared;
 
-public class MainActivity extends AppCompatActivity implements ConnectDialogFragment.ConnectDialogListener {
+public class MainActivity
+        extends AppCompatActivity
+        implements ConnectDialogFragment.ConnectDialogListener, ProductDialogFragment.ProductDialogListener
+{
 
 
 
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements ConnectDialogFrag
     Boolean connected = false;
 
     Shared storage, settings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +53,19 @@ public class MainActivity extends AppCompatActivity implements ConnectDialogFrag
 
 
 
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList("list", this.adapter.getProducts());
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        this.adapter.setProducts(savedInstanceState.<Product>getParcelableArrayList("list"));
-        this.adapter.notifyDataSetChanged();
-        super.onRestoreInstanceState(savedInstanceState);
-    }
+//
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        outState.putParcelableArrayList("list", this.adapter.getProducts());
+//        super.onSaveInstanceState(outState);
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        this.adapter.setProducts(savedInstanceState.<Product>getParcelableArrayList("list"));
+//        this.adapter.notifyDataSetChanged();
+//        super.onRestoreInstanceState(savedInstanceState);
+//    }
 
     @Override
     protected void onRestart() {
@@ -128,6 +134,17 @@ public class MainActivity extends AppCompatActivity implements ConnectDialogFrag
     private void onViewBinder(){
         this.listView = findViewById(R.id.list);
         this.viewFlipper = findViewById(R.id.header);
+
+        (findViewById(R.id.buttonAdd)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductDialogFragment productDialog = new ProductDialogFragment();
+                productDialog.show(getSupportFragmentManager(), "product");
+
+            }
+        });
+
+
         this.onUserBinder();
     }
 
@@ -167,30 +184,62 @@ public class MainActivity extends AppCompatActivity implements ConnectDialogFrag
     }
 
     private void onDataBinder(){
-
-
-        final ArrayList<Product> products = new ArrayList<>();
-        products.add(new Product("Milk", "Description of Milk"));
-        products.add(new Product("Cola","Description of Cola"));
-        products.add(new Product("Pizza","Description of Pizza"));
-
+        ArrayList<Product> products = new ArrayList<>();
         this.adapter = new ProductAdapter(this, R.layout.activity_main, products);
         this.listView.setAdapter(adapter);
 
         this.onUserBinder();
+        this.onProductsBinder();
+
+    }
+
+    private void onProductsBinder(){
+        try{
+            ArrayList<Product> products = new ArrayList<>();
+            products = Internal.getProducts(MainActivity.this);
+            this.adapter.setProducts(products);
+
+        }
+        catch (Exception e)
+        {
+            Log.e("Error", e.getMessage());
+        }
+    }
+
+    @Override
+    public void PD_onDialogPositiveClick(String title, String description) {
+
+
+        ArrayList<Product> products;
+        try{
+            products = Internal.getProducts(MainActivity.this);
+            products.add(new Product(title, description));
+
+            Internal.setProducts(MainActivity.this, products);
+            this.onProductsBinder();
+        }
+        catch (Exception e)
+        {
+            Log.e("Error", e.getMessage());
+        }
 
 
     }
 
     @Override
-    public void onDialogPositiveClick(String username, String password) {
+    public void PD_onDialogNegativeClick() {
+
+    }
+
+    @Override
+    public void CD_onDialogPositiveClick(String username, String password) {
         this.storage.set(Shared.USER_USERNAME, username);
         this.storage.set( Shared.USER_PASSWORD, password);
         onUserBinder();
     }
 
     @Override
-    public void onDialogNegativeClick() {
+    public void CD_onDialogNegativeClick() {
 
     }
 }

@@ -17,5 +17,13 @@
     <string name="words_username">Username</string>
     <string name="words_password">Password</string>
 
+    <string name="words_name">Name</string>
+    <string name="words_description">Description</string>
+
+    <string name="words_create">Create</string>
     <string name="warning_credentials">Username (min 3) and/or Password (min 5) are too short.</string>
+
+    <string name="warning_short">The provided info is too short.</string>
+
+    <string name="struct_product_create">Create product</string>
 </resources>

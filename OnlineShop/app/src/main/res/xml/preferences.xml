@@ -8,6 +8,8 @@
         app:title="Welcome message"
         app:summary="Provide a message that will be printed after you connect"
         android:persistent="true"
+        android:icon="@drawable/round_settings_24"
+        android:drawableTint="@color/colorPrimary"
         android:defaultValue="Welcome"
         />
 
@@ -16,7 +18,14 @@
         app:title="Age"
         app:summary="Provide your age so we don't sell you illegal stuff"
         android:persistent="true"
+        android:icon="@drawable/round_settings_24"
+        android:drawableTint="@color/colorPrimary"
         android:defaultValue="Alive"
+        />
+    <Preference
+        app:key="SETTING_CLEAR"
+        app:title="Clear product list"
+        app:summary="Clear the list of products to start fresh"
         />
 
 </PreferenceScreen>

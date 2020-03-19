@@ -61,7 +61,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     }
 
     public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+        this.products.clear();
+        this.products.addAll(products);
+        this.notifyDataSetChanged();
     }
 
 }

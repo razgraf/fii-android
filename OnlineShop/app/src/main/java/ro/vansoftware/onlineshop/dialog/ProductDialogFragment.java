@@ -5,29 +5,28 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import ro.vansoftware.onlineshop.R;
 
-public class ConnectDialogFragment extends DialogFragment {
+public class ProductDialogFragment extends DialogFragment {
 
-    public interface ConnectDialogListener {
-        public void CD_onDialogPositiveClick(String username, String password);
-        public void CD_onDialogNegativeClick();
+    public interface ProductDialogListener {
+        public void PD_onDialogPositiveClick(String name, String description);
+        public void PD_onDialogNegativeClick();
     }
 
-    private ConnectDialogListener connectDialogListener;
+    private ProductDialogListener productDialogListener;
 
     public void onAttach(Context context) {
         super.onAttach(context);
-        connectDialogListener = (ConnectDialogListener) context;
+        productDialogListener = (ProductDialogListener) context;
     }
 
 
@@ -39,19 +38,19 @@ public class ConnectDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         final LayoutInflater inflater = requireActivity().getLayoutInflater();
-        final View view = inflater.inflate(R.layout.dialog_connect, null);
+        final View view = inflater.inflate(R.layout.dialog_product, null);
 
         builder.setView(view)
-                .setPositiveButton(R.string.words_connect, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.words_create, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String username = ((EditText) (view.findViewById(R.id.username))).getText().toString();
-                        String password = ((EditText) (view.findViewById(R.id.password))).getText().toString();
+                        String title = ((EditText) (view.findViewById(R.id.name))).getText().toString();
+                        String description = ((EditText) (view.findViewById(R.id.description))).getText().toString();
 
-                        if(username.length() < 3 || password.length() < 5)
-                            Toast.makeText(getActivity(),R.string.warning_credentials, Toast.LENGTH_SHORT).show();
+                        if(title.length() < 3 || description.length() < 3)
+                            Toast.makeText(getActivity(),R.string.warning_short, Toast.LENGTH_SHORT).show();
                         else {
-                            connectDialogListener.CD_onDialogPositiveClick(username, password);
+                            productDialogListener.PD_onDialogPositiveClick(title, description);
                             dialog.cancel();
                         }
                     }
