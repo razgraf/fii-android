@@ -22,4 +22,15 @@
         android:orderInCategory="4"
         android:title="@string/menu_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sensors"
+        android:orderInCategory="5"
+        android:title="@string/menu_sensors"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_location"
+        android:orderInCategory="6"
+        android:title="@string/menu_location"
+        app:showAsAction="never" />
 </menu>

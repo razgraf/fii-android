@@ -1,6 +1,5 @@
 package ro.vansoftware.onlineshop;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -53,19 +52,19 @@ public class MainActivity
 
 
 
-//
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        outState.putParcelableArrayList("list", this.adapter.getProducts());
-//        super.onSaveInstanceState(outState);
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        this.adapter.setProducts(savedInstanceState.<Product>getParcelableArrayList("list"));
-//        this.adapter.notifyDataSetChanged();
-//        super.onRestoreInstanceState(savedInstanceState);
-//    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("list", this.adapter.getProducts());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        this.adapter.setProducts(savedInstanceState.<Product>getParcelableArrayList("list"));
+        this.adapter.notifyDataSetChanged();
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
     @Override
     protected void onRestart() {
@@ -121,6 +120,14 @@ public class MainActivity
             case R.id.action_settings:
                 Intent intentSettings = new Intent(this, SettingsActivity.class);
                 startActivity(intentSettings);
+                break;
+            case R.id.action_sensors:
+                Intent intentSensors = new Intent(this, SensorActivity.class);
+                startActivity(intentSensors);
+                break;
+            case R.id.action_location:
+                Intent intentLocation = new Intent(this, LocationActivity.class);
+                startActivity(intentLocation);
                 break;
             default: break;
         }
