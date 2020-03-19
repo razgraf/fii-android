@@ -18,11 +18,11 @@ import java.util.Map;
 
 public class SensorActivity extends AppCompatActivity implements SensorEventListener {
 
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
-    private Sensor mGravity;
-    private Sensor mPressure;
-    private Sensor mProximity;
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private Sensor gravity;
+    private Sensor pressure;
+    private Sensor proximity;
 
     private Map<Integer, String> list = new HashMap<>();
 
@@ -33,13 +33,13 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
 
         setTitle("Sensors");
 
-        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        mPressure = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        gravity = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        proximity = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        pressure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
 
-        List<Sensor> sensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
+        List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
 
         for(Sensor s : sensors)
             list.put(s.getType(), "");
@@ -49,15 +49,15 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
 
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, mPressure, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, gravity, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, proximity, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     protected void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener(this);
+        sensorManager.unregisterListener(this);
 
     }
 
@@ -78,7 +78,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
         for (Map.Entry<Integer,String> entry : list.entrySet())
         {
 
-            result.append(mSensorManager.getDefaultSensor(entry.getKey()).getName());
+            result.append(sensorManager.getDefaultSensor(entry.getKey()).getName());
             result.append(" - ");
             result.append(entry.getValue());
             result.append("\n");

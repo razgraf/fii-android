@@ -7,6 +7,7 @@
 [1. L1, L2, L3](###L1-L2-L3)  
 [2. L4](###L4)
 [3. L5](###L5)
+[4. L6](###L6)
 
 ---
 
@@ -61,3 +62,19 @@ The Options Menu includes 3 actions with the following intents:
 4. Connected settings preferences to other parts of the app (`Main Screen`)
 5. Used local storage (internal) to save the list of items/products
 6. Provided a way (dialog) to create items or clear the list (pref settings)
+
+## L6
+
+```
+    1. Sensor Manager (4p)
+    2. Location Services (4p)
+```
+
+| Sensor Activity                           | (Geo)Location Activity                       |
+| ----------------------------------------- | -------------------------------------------- |
+| ![Sensor Activity](images/l6_sensors.png) | ![Location Activity](images/l6_location.png) |
+
+**Story**
+
+1. Implemented a SensorEventListener and configured `accelerometer, gravity, pressure and proximity`
+2. Implemented a location listener (with checks for permissions) and converted the result into a readable address
