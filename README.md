@@ -45,6 +45,8 @@ The Options Menu includes 3 actions with the following intents:
 
 ## L5
 
+**Task**
+
 ```
     1. Settings Activity (4p)
     2. Shared Preferences implementation (4p)
@@ -64,6 +66,8 @@ The Options Menu includes 3 actions with the following intents:
 6. Provided a way (dialog) to create items or clear the list (pref settings)
 
 ## L6
+
+**Task**
 
 ```
     1. Sensor Manager (4p)
