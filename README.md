@@ -2,6 +2,27 @@
 
 # Projects for the Android course 2019-2020 (UAIC Cuza 2020, Faculty Of Computer Science)
 
+## Final Project (White Tiles / Van Tiles)
+
+**Task**
+
+```
+    1. Implement an app similar to 'Don't touch the White Tiles' / 'Piano Tiles' (in pure Android)
+    2. Implement extra features such as local Leaderboards or social-share intents
+```
+
+**Exact Project Description**
+
+WhiteTile - The game consists of a grid in which there are white/black tiles coming from the top of the screen to the bottom with an increasing speed. The goal of the game is to touch only the black tiles(which should make a sound). Menu with highscores, share on facebook, new game.
+
+**Preview**
+
+[![Video preview](images/tilespreview.png)](https://youtu.be/l8t8maEjppU)
+
+[The APK is located at the root of this repositoy](van-tiles-app.apk).
+
+## Labs
+
 #### Collection
 
 [1. L1, L2, L3](#L1-L2-L3)  
