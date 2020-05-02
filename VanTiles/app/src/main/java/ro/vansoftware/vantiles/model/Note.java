@@ -8,14 +8,14 @@ public class Note {
     public int line = 0;
     public int column = 0;
     public boolean isVisible = false;
+    public String sound = "a3";
 
-    public Tile tile;
 
-
-    public Note(int line, int column, boolean isVisible){
+    public Note(int line, int column, boolean isVisible, String sound){
         this.line = line;
         this.column = column;
         this.isVisible = isVisible;
+        this.sound = sound;
     }
 
 }

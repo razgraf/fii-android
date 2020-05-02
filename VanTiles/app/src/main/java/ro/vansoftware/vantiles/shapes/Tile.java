@@ -12,19 +12,23 @@ import java.util.Map;
 import androidx.annotation.Nullable;
 import ro.vansoftware.vantiles.constants.Constants;
 import ro.vansoftware.vantiles.model.Location;
+import ro.vansoftware.vantiles.model.Note;
 import ro.vansoftware.vantiles.model.Size;
+import ro.vansoftware.vantiles.utils.SoundPoolPlayer;
 import ro.vansoftware.vantiles.utils.Utils;
 
 public class Tile {
 
     private Context context;
+
     private Location location = Constants.INITIAL_TILE_LOCATION;
     private Rect rectangle;
     private Paint paint;
+    public Note note;
 
-    public boolean isVisible = false;
-    public boolean isUsed = false;
+    private Paint afterPaint;
 
+    public boolean isClicked = false;
 
     public Tile(Context context) {
         this.context = context;
@@ -34,8 +38,12 @@ public class Tile {
     public void initialize(){
         this.rectangle = new Rect();
         this.paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        this.paint.setColor(Color.RED);
+        this.paint.setColor(Color.parseColor("#1F2133"));
         this.paint.setStyle(Paint.Style.FILL);
+
+        this.afterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        this.afterPaint.setColor(Color.parseColor("#eeeeee"));
+        this.afterPaint.setStyle(Paint.Style.FILL);
 
         Map<String, Integer> screen = Utils.getScreenDimensions(this.context);
         int width = Math.round(screen.get("width")) / 4;
@@ -43,6 +51,10 @@ public class Tile {
         this.setLocation(new Location(-height,-width, new Size(width, height)));
     }
 
+
+    public Location getLocation() {
+        return location;
+    }
 
     protected void setLocation(Location location){
         this.location = location;
@@ -68,12 +80,22 @@ public class Tile {
 
 
     public void draw(Canvas canvas){
-        canvas.drawRect(this.rectangle, this.paint);
+        canvas.drawRect(this.rectangle, this.isClicked ? this.afterPaint : this.paint);
     }
 
     public Tile copy(){
         Tile result = new Tile(this.context);
         result.setLocation(this.location);
+        result.note = this.note;
+
         return result;
+    }
+
+    public void click(SoundPoolPlayer player){
+        if(!this.isClicked){
+            this.isClicked = true;
+            player.playShortResource(Utils.getResourceByNote(this.note.sound));
+        }
+
     }
 }

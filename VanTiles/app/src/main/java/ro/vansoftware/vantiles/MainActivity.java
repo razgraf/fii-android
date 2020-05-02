@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         this.gameView = new GameView(this);
         setContentView(gameView);
 
-
     }
 
 
