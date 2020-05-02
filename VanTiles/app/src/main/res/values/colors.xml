@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+
+
+    <color name="dark">#1F2133</color>
+    <color name="van">#4C20FA</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#F44336</color>
+    <color name="redDark">#B71C1C</color>
+    <color name="vanDark">#3918BC</color>
+    <color name="facebook">#4267B2</color>
+
+
+    <color name="colorPrimary">@color/van</color>
+    <color name="colorPrimaryDark">@color/vanDark</color>
+    <color name="colorAccent">@color/dark</color>
+
+
 </resources>

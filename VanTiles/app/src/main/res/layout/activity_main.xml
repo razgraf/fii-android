@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,23 +7,87 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/van"
+        />
 
-   <FrameLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="40dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/vanDark"
+            android:padding="5dp"
+            android:layout_marginBottom="50dp"
+            >
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_launcher_van_round"
+                />
+        </RelativeLayout>
 
-       <ImageView
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:src="@drawable/background"
-           android:adjustViewBounds="true"
-           android:scaleType="centerCrop"
-           />
-        <FrameLayout
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/frame"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/title"
+            android:textStyle="bold"
+            android:textSize="45sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="100dp"
             />
-   </FrameLayout>
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/dark"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/start"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/startGame"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@color/white"
+                android:id="@+id/leaderboards"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/leaderboards"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="@color/dark"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

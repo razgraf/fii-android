@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">VanTiles</string>
+    <string name="title">VanTiles</string>
+    <string name="startGame">Start Game</string>
+    <string name="leaderboards">Leaderboards</string>
+
+    <string name="gameOver">Game Over</string>
+    <string name="gameWon">You Won!!</string>
+
+    <string name="yourScoreWas">your score was</string>
+    <string name="tryAgain">Try again</string>
+
+    <string name="returnHome">Return to Welcome Screen</string>
+    <string name="shareScore">Share score on Social Media</string>
+
 </resources>

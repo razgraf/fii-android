@@ -11,8 +11,12 @@ import android.graphics.Paint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import ro.vansoftware.vantiles.R;
 
@@ -120,6 +124,13 @@ public class Utils {
         return R.raw.a5;
     }
 
+
+    public static String getNow(){
+        Date presentTime_Date = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return dateFormat.format(presentTime_Date);
+    }
 
 
 
